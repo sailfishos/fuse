@@ -1,0 +1,48 @@
+* Mon Dec 10 2012 Marko Saukko <marko.saukko@jollamobile.com> - 2.9.0
+- Updated packaging.
+
+* Wed May 16 2012 Marko Saukko <sage@merproject.org> - 2.9.0
+- Update to version 2.9.0
+- Dropped makedev.d files 99-fuse.nodes and z-fuse.
+
+* Fri Mar 30 2012 Maurice de la Ferté <Maurice.Ferte@basyskom.com> - 2.8.6
+- Add 06-clone_newns.patch from https://launchpadlibrarian.net/94590211/fuse.debdiff
+
+* Wed Nov 16 2011 Marko Saukko <marko.saukko@cybercom.com> - 2.8.6
+- Update to 2.8.6
+
+* Wed May 11 2011 Anas Nashif <anas.nashif@intel.com> - 2.8.5
+- Update to 2.8.5
+
+* Mon May 02 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 2.8.4
+- FEA#16109 - [FEA] Implement SystemD as MeeGo init provide
+- As systemd is now the MeeGo init provider there is no need for
+  chkconfig to be used. 
+
+* Thu Jul 15 2010 Anas Nashif <anas.nashif@intel.com> - 2.8.4
+- Install udev rules in /lib/udev (bmc #3424)
+
+* Fri Feb 26 2010 Anas Nashif <anas.nashif@intel.com> - 2.8.3
+- Removed requirement on kernel
+- Fixed groups
+
+* Thu Feb 25 2010 Passion Zhao <passion.zhao@intel.com> - 2.8.3
+- Update to 2.8.3
+
+* Tue Feb 16 2010 Anas Nashif <anas.nashif@intel.com> - 2.7.4
+- Use spectacle
+
+* Fri Feb 05 2010 Auke Kok <auke-jan.h.kok@intel.com> - 2.7.4
+- remove obsolete udev rule key
+
+* Tue Sep 01 2009 Auke Kok <auke-jan.h.kok@intel.com> - 2.7.4
+- Fix Extras use in ini
+
+* Wed Apr 08 2009 Passion Zhao <passion.zhao@intel.com> - 2.7.4
+- Update to 2.7.4
+
+* Fri Dec 19 2008 Arjan van de Ven <arjan@linux.intel.com> - 2.7.3
+- Move the libs and pkgconfig files to /usr/lib
+
+* Tue Dec 16 2008 Arjan van de Ven <arjan@linux.intel.com> - 2.7.3
+- Create standardized spec file
