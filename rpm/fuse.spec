@@ -31,7 +31,7 @@ mount a FUSE filesystem.
 %package devel
 Summary:    File System in Userspace (FUSE) devel files
 Group:      Development/Libraries
-Requires:   %{name} = %{version}-%{release}
+Requires:   fuse-libs = %{version}-%{release}
 
 %description devel
 With FUSE it is possible to implement a fully functional filesystem in a
