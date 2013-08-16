@@ -85,7 +85,7 @@ rm -rf %{buildroot}
 
 # >> install post
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/fuse.conf
-%ifnarch %{ix86}
+%ifnarch %{ix86} x86_64
 # HACK!!! Please remove when possible.
 # For some reason /dev/fuse doesn't exist on ARM builds and make install
 # creates the node which doesn't belong to the package, thus these lines.
