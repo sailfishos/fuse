@@ -19,6 +19,7 @@ Source1:    %{name}.conf
 Source100:  fuse.yaml
 Patch0:     fuse-udev_rules.patch
 Patch1:     fuse-0001-More-parentheses.patch
+Patch2:     use-cache-update-mtime.patch
 Requires:   which
 BuildRequires:  gettext-devel
 
@@ -58,6 +59,7 @@ userspace program. This package contains the FUSE libraries.
 %patch0 -p1
 # fuse-0001-More-parentheses.patch
 %patch1 -p1
+%patch2 -p1
 # >> setup
 # << setup
 

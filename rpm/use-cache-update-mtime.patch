@@ -1,0 +1,25 @@
+diff --git a/include/fuse_kernel.h b/include/fuse_kernel.h
+index c632b58..60cd0c1 100644
+--- a/include/fuse_kernel.h
++++ b/include/fuse_kernel.h
+@@ -207,6 +207,7 @@ struct fuse_file_lock {
+ #define FUSE_BIG_WRITES		(1 << 5)
+ #define FUSE_DONT_MASK		(1 << 6)
+ #define FUSE_FLOCK_LOCKS	(1 << 10)
++#define FUSE_AUTO_INVAL_DATA	(1 << 12)
+ 
+ /**
+  * CUSE INIT request/reply flags
+	Modified   lib/fuse_lowlevel.c
+diff --git a/lib/fuse_lowlevel.c b/lib/fuse_lowlevel.c
+index 8853346..54ac657 100644
+--- a/lib/fuse_lowlevel.c
++++ b/lib/fuse_lowlevel.c
+@@ -1858,6 +1858,7 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
+ 		outarg.flags |= FUSE_FLOCK_LOCKS;
+ 	outarg.max_readahead = f->conn.max_readahead;
+ 	outarg.max_write = f->conn.max_write;
++    outarg.flags |= FUSE_AUTO_INVAL_DATA;
+ 	if (f->conn.proto_minor >= 13) {
+ 		if (f->conn.max_background >= (1 << 16))
+ 			f->conn.max_background = (1 << 16) - 1;
