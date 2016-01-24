@@ -1,3 +1,3 @@
-[submodule "fuse"]
+[submodule "libfuse"]
 	path = fuse
-	url = git://fuse.git.sourceforge.net/gitroot/fuse/fuse
+	url = https://github.com/libfuse/libfuse
