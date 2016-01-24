@@ -19,6 +19,7 @@ Source1:    %{name}.conf
 Source100:  fuse.yaml
 Patch0:     fuse-udev_rules.patch
 Patch1:     fuse-0001-More-parentheses.patch
+Patch2:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
 Requires:   which
 BuildRequires:  gettext-devel
 
@@ -58,6 +59,8 @@ userspace program. This package contains the FUSE libraries.
 %patch0 -p1
 # fuse-0001-More-parentheses.patch
 %patch1 -p1
+# 200-backport_arm64_fuse_kernel_h_clean_includes.patch
+%patch2 -p1
 # >> setup
 # << setup
 
@@ -84,7 +87,7 @@ rm -rf %{buildroot}
 %make_install
 
 # >> install post
-install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/fuse.conf
+install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/%{name}.conf
 %ifnarch %{ix86} x86_64
 # HACK!!! Please remove when possible.
 # For some reason /dev/fuse doesn't exist on ARM builds and make install
