@@ -7,7 +7,6 @@ License:    LGPLv2+
 URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Source1:    %{name}.conf
-Source100:  fuse.yaml
 Patch0:     fuse-udev_rules.patch
 Patch1:     fuse-0001-More-parentheses.patch
 Patch2:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
