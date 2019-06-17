@@ -58,12 +58,11 @@ Man pages for %{name}.
 %patch2 -p1
 
 %build
-export UDEV_RULES_PATH=/lib/udev/rules.d
+export UDEV_RULES_PATH=/usr/lib/udev/rules.d
+export MOUNT_FUSE_PATH=%{_sbindir}
 ./makeconf.sh
 
 %configure --disable-static \
-    --bindir=/bin \
-    --exec-prefix=/ \
     --enable-example
 
 make %{?jobs:-j%jobs}
@@ -93,11 +92,11 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %files
 %defattr(-,root,root,-)
 %license COPYING
-/sbin/mount.fuse
-%attr(4755,root,root) /bin/fusermount
-/bin/ulockmgr_server
+%{_sbindir}/mount.fuse
+%attr(4755,root,root) %{_bindir}/fusermount
+%{_bindir}/ulockmgr_server
 %exclude %{_sysconfdir}/init.d/fuse
-%config /lib/udev/rules.d/99-fuse.rules
+%config /usr/lib/udev/rules.d/99-fuse.rules
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 
 %files devel
