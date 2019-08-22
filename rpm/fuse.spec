@@ -1,6 +1,6 @@
 Name:       fuse
 Summary:    File System in Userspace (FUSE) utilities
-Version:    2.9.0
+Version:    2.9.9
 Release:    1
 Group:      System/Base
 License:    LGPLv2+
@@ -84,7 +84,7 @@ rm -rf  %{buildroot}/dev
 
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
-        AUTHORS ChangeLog FAQ Filesystems NEWS README README.NFS
+        AUTHORS ChangeLog NEWS README.md README.NFS
 
 %post libs -p /sbin/ldconfig
 
