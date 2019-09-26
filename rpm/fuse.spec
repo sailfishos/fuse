@@ -98,7 +98,7 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 /bin/ulockmgr_server
 %exclude %{_sysconfdir}/init.d/fuse
 %config /lib/udev/rules.d/99-fuse.rules
-%config(noreplace) %{_sysconfdir}/%{name}.conf
+%config %{_sysconfdir}/%{name}.conf
 
 %files devel
 %defattr(-,root,root,-)
