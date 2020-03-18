@@ -2,15 +2,13 @@ Name:       fuse
 Summary:    File System in Userspace (FUSE) utilities
 Version:    2.9.9
 Release:    1
-Group:      System/Base
 License:    LGPLv2+
 URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Source1:    %{name}.conf
-Patch0:     fuse-udev_rules.patch
-Patch1:     fuse-0001-More-parentheses.patch
-Patch2:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
+Patch0:     fuse-0001-More-parentheses.patch
+Patch1:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
 Requires:   which
+Requires:   fuse-common
 BuildRequires:  gettext-devel
 
 %description
@@ -20,7 +18,6 @@ mount a FUSE filesystem.
 
 %package devel
 Summary:    File System in Userspace (FUSE) devel files
-Group:      Development/Libraries
 Requires:   fuse-libs = %{version}-%{release}
 
 %description devel
@@ -30,7 +27,6 @@ pgk-config) to develop FUSE based applications/filesystems.
 
 %package libs
 Summary:    File System in Userspace (FUSE) libraries
-Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -41,24 +37,15 @@ userspace program. This package contains the FUSE libraries.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
 Man pages for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-
-# fuse-udev_rules.patch
-%patch0 -p1
-# fuse-0001-More-parentheses.patch
-%patch1 -p1
-# 200-backport_arm64_fuse_kernel_h_clean_includes.patch
-%patch2 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
-export UDEV_RULES_PATH=/lib/udev/rules.d
 ./makeconf.sh
 
 %configure --disable-static \
@@ -73,7 +60,6 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %make_install
 
-install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/%{name}.conf
 %ifnarch %{ix86} x86_64
 # HACK!!! Please remove when possible.
 # For some reason /dev/fuse doesn't exist on ARM builds and make install
@@ -81,6 +67,9 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/%{name}.conf
 rm -f %{buildroot}/dev/fuse
 rm -rf  %{buildroot}/dev
 %endif
+
+# Delete pointless udev rules, default udev rules contain fuse already.
+rm -f %{buildroot}%{_sysconfdir}/udev/rules.d/99-fuse.rules
 
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
@@ -97,8 +86,6 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %attr(4755,root,root) /bin/fusermount
 /bin/ulockmgr_server
 %exclude %{_sysconfdir}/init.d/fuse
-%config /lib/udev/rules.d/99-fuse.rules
-%config %{_sysconfdir}/%{name}.conf
 
 %files devel
 %defattr(-,root,root,-)
