@@ -2,7 +2,6 @@ Name:       fuse
 Summary:    File System in Userspace (FUSE) utilities
 Version:    2.9.9
 Release:    1
-Group:      System/Base
 License:    LGPLv2+
 URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -19,7 +18,6 @@ mount a FUSE filesystem.
 
 %package devel
 Summary:    File System in Userspace (FUSE) devel files
-Group:      Development/Libraries
 Requires:   fuse-libs = %{version}-%{release}
 
 %description devel
@@ -29,7 +27,6 @@ pgk-config) to develop FUSE based applications/filesystems.
 
 %package libs
 Summary:    File System in Userspace (FUSE) libraries
-Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -40,7 +37,6 @@ userspace program. This package contains the FUSE libraries.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
