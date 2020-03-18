@@ -6,11 +6,11 @@ Group:      System/Base
 License:    LGPLv2+
 URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Source1:    %{name}.conf
 Patch0:     fuse-udev_rules.patch
 Patch1:     fuse-0001-More-parentheses.patch
 Patch2:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
 Requires:   which
+Requires:   fuse-common
 BuildRequires:  gettext-devel
 
 %description
@@ -73,7 +73,6 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %make_install
 
-install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/%{name}.conf
 %ifnarch %{ix86} x86_64
 # HACK!!! Please remove when possible.
 # For some reason /dev/fuse doesn't exist on ARM builds and make install
@@ -98,7 +97,6 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 /bin/ulockmgr_server
 %exclude %{_sysconfdir}/init.d/fuse
 %config /lib/udev/rules.d/99-fuse.rules
-%config %{_sysconfdir}/%{name}.conf
 
 %files devel
 %defattr(-,root,root,-)
