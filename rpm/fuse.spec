@@ -6,9 +6,8 @@ Group:      System/Base
 License:    LGPLv2+
 URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch0:     fuse-udev_rules.patch
-Patch1:     fuse-0001-More-parentheses.patch
-Patch2:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
+Patch0:     fuse-0001-More-parentheses.patch
+Patch1:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
 Requires:   which
 Requires:   fuse-common
 BuildRequires:  gettext-devel
@@ -48,17 +47,9 @@ Requires:  %{name} = %{version}-%{release}
 Man pages for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-
-# fuse-udev_rules.patch
-%patch0 -p1
-# fuse-0001-More-parentheses.patch
-%patch1 -p1
-# 200-backport_arm64_fuse_kernel_h_clean_includes.patch
-%patch2 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
-export UDEV_RULES_PATH=/lib/udev/rules.d
 ./makeconf.sh
 
 %configure --disable-static \
@@ -81,6 +72,9 @@ rm -f %{buildroot}/dev/fuse
 rm -rf  %{buildroot}/dev
 %endif
 
+# Delete pointless udev rules, default udev rules contain fuse already.
+rm -f %{buildroot}%{_sysconfdir}/udev/rules.d/99-fuse.rules
+
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
         AUTHORS ChangeLog NEWS README.md README.NFS
@@ -96,7 +90,6 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %attr(4755,root,root) /bin/fusermount
 /bin/ulockmgr_server
 %exclude %{_sysconfdir}/init.d/fuse
-%config /lib/udev/rules.d/99-fuse.rules
 
 %files devel
 %defattr(-,root,root,-)
