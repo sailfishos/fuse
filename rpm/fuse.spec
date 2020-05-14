@@ -9,6 +9,8 @@ Patch0:     fuse-0001-More-parentheses.patch
 Patch1:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
 Requires:   which
 Requires:   fuse-common
+BuildRequires:  autoconf
+BuildRequires:  libtool
 BuildRequires:  gettext-devel
 
 %description
