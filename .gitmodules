@@ -1,3 +1,3 @@
 [submodule "fuse"]
 	path = fuse
-	url = https://git.sailfishos.org/mirror/libfuse
+	url = https://github.com/sailfishos-mirror/libfuse
