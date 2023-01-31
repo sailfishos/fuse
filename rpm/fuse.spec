@@ -7,6 +7,7 @@ URL:        http://fuse.sf.net
 Source0:    http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:     fuse-0001-More-parentheses.patch
 Patch1:     200-backport_arm64_fuse_kernel_h_clean_includes.patch
+Patch2:     fuse-0003-util-ulockmgr_server.c-conditionally-define-closefro.patch
 Requires:   which
 Requires:   fuse-common
 BuildRequires:  autoconf
